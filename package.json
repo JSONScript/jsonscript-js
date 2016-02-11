@@ -1,0 +1,28 @@
+{
+  "name": "jsonscript-js",
+  "version": "0.1.0",
+  "description": "JSONScript interpreter in JavaScript",
+  "main": "lib/jsonscript.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JSONScript/jsonscript-js.git"
+  },
+  "keywords": [
+    "JSONScript",
+    "JavaScript",
+    "interpreter"
+  ],
+  "author": "Evgeny Poberezkin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JSONScript/jsonscript-js/issues"
+  },
+  "homepage": "https://github.com/JSONScript/jsonscript-js",
+  "dependencies": {
+    "ajv": "^3.5.3",
+    "jsonscript": "^0.1.0"
+  }
+}
