@@ -1,0 +1,19 @@
+{{# def.definitions }}
+{{# def.setup }}
+{{# def.setupNextLevel }}
+
+var {{=$valid}};
+if ({{=$data}} && typeof {{=$data}}.then == 'function') {
+  var {{=$newData}} = {{=$data}}.then(function ({{=$data}}) {
+    {{= it.validate($it) }}
+    if (valid{{=$it.level}}) return {{=$data}};
+    throw new ValidationError(vErrors);
+  });
+
+  {{# def.replaceWithNewData }}
+
+  {{=$valid}} = true;
+} else {
+  {{= it.validate($it) }}
+  {{=$valid}} = valid{{=$it.level}};
+}

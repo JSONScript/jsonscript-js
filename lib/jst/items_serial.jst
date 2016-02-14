@@ -1,0 +1,17 @@
+{{# def.definitions }}
+{{# def.setup }}
+{{# def.setupNextLevel }}
+
+{{
+  var $dataNxt = $it.dataLevel = it.dataLevel + 1
+    , $nextData = 'data' + $dataNxt;
+  $it.dataPathArr[$dataNxt] = 'i' + $lvl;
+}}
+
+var {{=$newData}} = this._util.promiseMapSerial({{=$data}}, function({{=$nextData}}, i{{=$lvl}}) {
+  {{= it.validate($it) }}
+  if (valid{{=$it.level}}) return {{=$data}}[i{{=$lvl}}];
+  throw new ValidationError(vErrors);
+}, this);
+
+{{# def.replaceWithNewData }}

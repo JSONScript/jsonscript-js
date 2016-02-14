@@ -1,0 +1,36 @@
+{{## def.setup:
+  {{
+    var $keyword = arguments[1]
+      , $dataLvl = it.dataLevel
+      , $data = 'data' + ($dataLvl||'')
+      , $lvl = it.level
+      , $newData = 'js_newData' + $lvl
+      , $valid = 'valid' + $lvl;
+  }}
+#}}
+
+
+{{## def.setupNextLevel:
+  {{
+    var $it = it.util.copy(it);
+    $it.schema = it.schema[$keyword];
+    $it.level++;
+    $it.schemaPath = it.schemaPath + '.' + $keyword;
+    $it.errSchemaPath = it.errSchemaPath + '/' + $keyword;
+  }}
+#}}
+
+
+{{## def.replaceWithNewData:
+  {{? $dataLvl }}
+    {{
+      var $parentData = 'data' + (($dataLvl-1)||'')
+        , $dataProperty = it.dataPathArr[$dataLvl];
+    }}
+
+    {{=$data}} = {{=$parentData}}[{{=$dataProperty}}] = {{=$newData}};
+  {{??}}
+    data = {{=$newData}};
+    if (parentData !== undefined) parentData[parentDataProperty] = {{=$newData}};
+  {{?}}
+#}}

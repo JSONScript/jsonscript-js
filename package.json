@@ -4,7 +4,7 @@
   "description": "JSONScript interpreter in JavaScript",
   "main": "lib/jsonscript.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --recursive --reporter=spec spec"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,11 @@
   },
   "homepage": "https://github.com/JSONScript/jsonscript-js",
   "dependencies": {
-    "ajv": "^3.5.3",
+    "ajv": "^3.6.0",
+    "dot": "^1.0.3",
     "jsonscript": "^0.1.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.4.5"
   }
 }
