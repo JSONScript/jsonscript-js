@@ -1,6 +1,6 @@
 {
   "name": "jsonscript-js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "JSONScript interpreter in JavaScript",
   "main": "lib/jsonscript.js",
   "scripts": {
@@ -23,9 +23,9 @@
   },
   "homepage": "https://github.com/JSONScript/jsonscript-js",
   "dependencies": {
-    "ajv": "^3.6.0",
+    "ajv": "^3.6.2",
     "dot": "^1.0.3",
-    "jsonscript": "^0.1.0"
+    "jsonscript": "^0.1.1"
   },
   "devDependencies": {
     "istanbul": "^0.4.2",
