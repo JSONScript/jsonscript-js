@@ -1,9 +1,14 @@
 'use strict';
 
+var assert = require('assert');
+
 module.exports = {
-  getPromise: getPromise
+  getPromise: getPromise,
+  shouldBeError: shouldBeError
 };
 
+
+getPromise.callsResolutions = [];
 
 function getPromise(value, delay) {
   return new Promise(function (resolve, reject) {
@@ -20,4 +25,9 @@ function getPromise(value, delay) {
 }
 
 
-getPromise.callsResolutions = [];
+function shouldBeError(p, message) {
+  return p.then(
+    function (res) { throw new Error('should have thrown error') },
+    function (e) { assert.equal(e.message, message); }
+  );
+}

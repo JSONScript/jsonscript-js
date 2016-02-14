@@ -2,8 +2,10 @@
 
 var JSONScript = require('../lib/jsonscript');
 var assert = require('assert');
-var Ajv = require('ajv');
-var getPromise = require('./testutil').getPromise;
+var testutil = require('./testutil');
+var getPromise = testutil.getPromise;
+var shouldBeError = testutil.shouldBeError;
+var routers = require('./routers');
 
 
 describe('script evaluation', function() {
@@ -11,47 +13,13 @@ describe('script evaluation', function() {
 
   before(function() {
     js = JSONScript();
-    js.addExecutor('router', router);
+    js.addExecutor('router', routers.router1);
   });
 
   beforeEach(function(){
     callsResolutions = getPromise.callsResolutions = [];
   });
 
-  function router(args) {
-    return router.get(args);
-  }
-
-  router.get = function(args) {
-    var path = args.path;
-    callsResolutions.push({ call: 'get: ' + path });
-    var result = path
-                  ? 'you requested ' + path
-                  : new Error('path not specified');
-    return getPromise(result, 10);
-  }
-
-  router.post = function(args) {
-    var path = args.path;
-    var body = args.body;
-    callsResolutions.push({ call: 'post: ' + path });
-    var result = path && body
-                  ? 'you posted ' + JSON.stringify(body) + ' to ' + path
-                  : new Error('path or body not specified');
-    return getPromise(result, 10);
-  }
-
-
-  it('should evaluate router.get script', function() {
-    var script = {
-      $exec: 'router',
-      $args: { path: '/resource' }
-    };
-
-    return js.evaluate(script).then(function (res) {
-      assert.equal(res, 'you requested /resource');
-    });
-  });
 
   it('should evaluate parallel execution', function() {
     var script = {
@@ -107,5 +75,5 @@ describe('script evaluation', function() {
         { res: 'you posted {"test":"test"} to /resource' }
       ]);
     });
-  });
+  });  
 });
