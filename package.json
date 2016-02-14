@@ -1,7 +1,7 @@
 {
   "name": "jsonscript-js",
   "version": "0.1.1",
-  "description": "JSONScript interpreter in JavaScript",
+  "description": "JavaScript interpreter for JSONScript",
   "main": "lib/jsonscript.js",
   "scripts": {
     "test": "mocha spec/*.spec.js -R spec",
@@ -12,8 +12,9 @@
     "url": "https://github.com/JSONScript/jsonscript-js.git"
   },
   "keywords": [
+    "remote processing",
+    "batch execution",
     "JSONScript",
-    "JavaScript",
     "interpreter"
   ],
   "author": "Evgeny Poberezkin",
