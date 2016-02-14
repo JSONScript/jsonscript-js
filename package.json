@@ -4,7 +4,8 @@
   "description": "JSONScript interpreter in JavaScript",
   "main": "lib/jsonscript.js",
   "scripts": {
-    "test": "mocha --recursive --reporter=spec spec"
+    "test": "mocha spec/*.spec.js -R spec",
+    "test-cov": "istanbul cover -x 'spec/**' node_modules/mocha/bin/_mocha -- spec/*.spec.js -R spec"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "jsonscript": "^0.1.0"
   },
   "devDependencies": {
+    "istanbul": "^0.4.2",
     "mocha": "^2.4.5"
   }
 }

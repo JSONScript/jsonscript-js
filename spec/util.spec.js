@@ -2,6 +2,7 @@
 
 var util = require('../lib/util');
 var assert = require('assert');
+var getPromise = require('./testutil').getPromise;
 
 
 describe('util', function() {
@@ -46,17 +47,8 @@ describe('util', function() {
     var callsResolutions;
 
     beforeEach(function() {
-      callsResolutions = [];
+      callsResolutions = getPromise.callsResolutions = [];
     });
-
-    function getPromise(value, delay) {
-      return new Promise(function (resolve, reject) {
-        setTimeout(function(){
-          callsResolutions.push({ res: value });
-          resolve(value);
-        }, delay);
-      });
-    }
 
     describe('map function is synchronous', function() {
       function syncMapper(data) {
