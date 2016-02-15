@@ -12,14 +12,14 @@ describe('evaluation keywords', function() {
     js = JSONScript();
   });
 
-  describe('keyword thenValidate', function() {
+  describe('keyword validateAsync', function() {
     var validate;
 
     beforeEach(function() {
       var schema = {
         properties: {
           foo: {
-            thenValidate: {
+            validateAsync: {
               type: 'string'
             }
           }
@@ -70,13 +70,13 @@ describe('evaluation keywords', function() {
   });
 
 
-  describe('keyword objectToPromise', function() {
+  describe('keyword objectToAsync', function() {
     var validate;
 
     beforeEach(function() {
       var schema = {
         properties: {
-          obj: { objectToPromise: true }
+          obj: { objectToAsync: true }
         }
       };
 
@@ -115,7 +115,7 @@ describe('evaluation keywords', function() {
       var schema = {
         properties: {
           arr: {
-            itemsSerial: { objectToPromise: true }
+            itemsSerial: { objectToAsync: true }
           }
         }
       };
@@ -143,7 +143,7 @@ describe('evaluation keywords', function() {
       var schema = {
         properties: {
           arr: {
-            objectToPromise: true,
+            objectToAsync: true,
             itemsSerial: { $ref: '#/properties/arr' }
           }
         }
