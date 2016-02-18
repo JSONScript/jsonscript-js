@@ -1,0 +1,32 @@
+[
+  {
+    "description": "$data errors",
+    "data": {
+      "foo": 1,
+      "baz": 2
+    },
+    "tests": [
+      {
+        "description": "invalid JSON pointer",
+        "script": { "$data": "foo" },
+        "error": "validation failed",
+        "validationErrors": [ "should match format \"json-pointer\"" ]
+      },
+      {
+        "description": "valid JSON pointer not pointing to any data",
+        "script": { "$data": "/abc" },
+        "error": "Invalid reference token: abc"
+      },
+      {
+        "description": "valid JSON pointer not pointing to any data 2",
+        "script": { "$data": "/foo/bar" },
+        "error": "Invalid reference token: bar"
+      },
+      {
+        "description": "valid JSON pointer is not resolvable",
+        "script": { "$data": "/abc/baz" },
+        "error": "Invalid reference token: abc"
+      }
+    ]
+  }
+]

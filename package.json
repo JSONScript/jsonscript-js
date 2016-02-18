@@ -5,7 +5,8 @@
   "main": "lib/jsonscript.js",
   "scripts": {
     "test": "mocha spec/*.spec.js -R spec",
-    "test-cov": "istanbul cover -x 'spec/**' node_modules/mocha/bin/_mocha -- spec/*.spec.js -R spec"
+    "test-cov": "istanbul cover -x 'spec/**' node_modules/mocha/bin/_mocha -- spec/*.spec.js -R spec",
+    "test-debug": "mocha spec/*.spec.js --debug-brk -R spec"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,8 @@
   },
   "devDependencies": {
     "istanbul": "^0.4.2",
+    "jsonscript-test": "^0.1.0",
+    "jsonscript-test-suite": "^0.1.0",
     "mocha": "^2.4.5"
   }
 }
