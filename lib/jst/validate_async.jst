@@ -12,15 +12,14 @@
 
 var {{=$valid}};
 if ({{=$data}} && typeof {{=$data}}.then == 'function') {
-  var {{=$newData}} = {{=$data}}.then(function ({{=$data}}) {
+  var {{=$newData}} = {{=$data}}.then((function ({{=$data}}) {
     {{# def.validateSubSchema }}
     if ({{=$valid}}) return {{=$data}};
     throw new ValidationError(vErrors);
-  });
+  }).bind(this));
 
   {{# def.replaceWithNewData }}
   {{=$valid}} = true;
 } else {
-  {{# def.validateSubSchema}}
+  {{# def.validateSubSchema }}
 }
-

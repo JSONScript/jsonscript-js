@@ -24,7 +24,7 @@ describe('$exec instruction - call to external executor', function() {
     };
 
     return js.evaluate(script).then(function (res) {
-      assert.equal(res, 'you requested /resource');
+      assert.equal(res, 'you requested /resource from router1');
     });
   });
 
@@ -68,7 +68,7 @@ describe('$exec instruction - call to external executor', function() {
     };
 
     return js.evaluate(script, data).then(function (res) {
-      assert.equal(res, 'you posted {"test":"test"} to /resource');
+      assert.equal(res, 'you posted {"test":"test"} to /resource at router1');
     });
   });
 
@@ -86,7 +86,7 @@ describe('$exec instruction - call to external executor', function() {
     };
 
     return js.evaluate(script, data).then(function (res) {
-      assert.equal(res, 'you posted {"test":"test"} to /resource');
+      assert.equal(res, 'you posted {"test":"test"} to /resource at router1');
     });
   });
 });

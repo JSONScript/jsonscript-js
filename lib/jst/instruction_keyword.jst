@@ -3,6 +3,23 @@
 
 var {{=$newData}} = this.js._evalKeywords.{{=$keyword}}.call(this, {{=$data}});
 
-{{# def.replaceWithNewData }}
-var {{=$valid}} = true;
+var {{=$valid}};
+if ({{=$newData}} instanceof this.js.Script) {
+  {{
+    var $it = it.util.copy(it);
+    $it.schema = { $ref: '#' };
+    $it.level++;
+  }}
+
+  {{=$newData}} = { script: {{=$newData}}.script };
+  {{# def.replaceWithNewData }}
+
+  {{# def.validateSubSchema }}
+
+  {{=$newData}} = {{=$data}}.script;
+  {{# def.replaceWithNewData }}
+} else {
+  {{# def.replaceWithNewData }}
+  {{=$valid}} = true;
+}
 

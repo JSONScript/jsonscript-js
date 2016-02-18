@@ -45,13 +45,6 @@
 #}}
 
 
-{{## def.validateSubSchemaAsync:
-  {{# def.validateSubSchema }}
-  if ({{=$valid}}) return {{=$data}};
-  throw new ValidationError(vErrors);
-#}}
-
-
 {{## def.setCompositeRule:
   {{
     var $wasComposite = it.compositeRule;
