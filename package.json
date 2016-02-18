@@ -26,6 +26,7 @@
   "dependencies": {
     "ajv": "^3.6.2",
     "dot": "^1.0.3",
+    "json-pointer": "^0.3.1",
     "jsonscript": "^0.1.2"
   },
   "devDependencies": {

@@ -86,7 +86,7 @@ describe('evaluation keywords', function() {
     it('should leave object as is if there are no promises', function() {
       var obj = { a: 1, b: 2, c: 3 };
       var data = { obj: obj };
-      assert(validate.call(js, data));
+      assert(validate.call({ js: js }, data));
       assert.strictEqual(validate.errors, null);
       assert.equal(data.obj, obj);
       assert.deepEqual(data.obj, obj);
@@ -100,7 +100,7 @@ describe('evaluation keywords', function() {
         d: 4
       };
       var data = { obj: obj };
-      assert(validate.call(js, data));
+      assert(validate.call({ js: js }, data));
       assert.strictEqual(validate.errors, null);
 
       return data.obj.then(function (res) {
@@ -128,7 +128,7 @@ describe('evaluation keywords', function() {
       ];
 
       var data = { arr: arr };
-      assert(validate.call(js, data));
+      assert(validate.call({ js: js }, data));
       assert.strictEqual(validate.errors, null);
 
       return data.arr.then(function (res) {
@@ -157,7 +157,7 @@ describe('evaluation keywords', function() {
       ];
 
       var data = { arr: arr };
-      assert(validate.call(js, data));
+      assert(validate.call({ js: js }, data));
       assert.strictEqual(validate.errors, null);
 
       var p1 = data.arr.then(function (res) {
@@ -173,7 +173,7 @@ describe('evaluation keywords', function() {
       ];
 
       var data = { arr: arr };
-      assert(validate.call(js, data));
+      assert(validate.call({ js: js }, data));
       assert.strictEqual(validate.errors, null);
 
       var p2 = data.arr.then(function (res) {

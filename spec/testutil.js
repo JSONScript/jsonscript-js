@@ -1,6 +1,7 @@
 'use strict';
 
 var assert = require('assert');
+var Ajv = require('ajv');
 
 module.exports = {
   getPromise: getPromise,
@@ -25,9 +26,16 @@ function getPromise(value, delay) {
 }
 
 
-function shouldBeError(p, message) {
+function shouldBeError(p, expectedMessage, expectedErrors) {
   return p.then(
     function (res) { throw new Error('should have thrown error') },
-    function (e) { assert.equal(e.message, message); }
+    function (e) {
+      assert.equal(e.message, expectedMessage);
+      if (expectedErrors) {
+        assert(e instanceof Ajv.ValidationError);
+        var errors = e.errors.map(function(err) { return err.message; });
+        assert.deepEqual(errors, expectedErrors);
+      }
+    }
   );
 }

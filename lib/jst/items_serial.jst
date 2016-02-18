@@ -8,7 +8,7 @@
   $it.dataPathArr[$dataNxt] = 'i' + $lvl;
 }}
 
-var {{=$newData}} = this._util.promiseMapSerial({{=$data}}, function({{=$nextData}}, i{{=$lvl}}) {
+var {{=$newData}} = this.js._util.promiseMapSerial({{=$data}}, function({{=$nextData}}, i{{=$lvl}}) {
   {{= it.validate($it) }}
   if (valid{{=$it.level}}) return {{=$data}}[i{{=$lvl}}];
   throw new ValidationError(vErrors);

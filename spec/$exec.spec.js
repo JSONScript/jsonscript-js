@@ -3,12 +3,11 @@
 var JSONScript = require('../lib/jsonscript');
 var assert = require('assert');
 var testutil = require('./testutil');
-var getPromise = testutil.getPromise;
 var shouldBeError = testutil.shouldBeError;
 var routers = require('./routers');
 
 
-describe('$exec evaluation', function() {
+describe('$exec instruction - call to external executor', function() {
   var js;
 
   before(function() {
@@ -55,5 +54,39 @@ describe('$exec evaluation', function() {
     };
 
     return shouldBeError(js.evaluate(script), 'unknown method put of executor router1');
+  });
+
+  it('should be able to use another instruction as part of arguments', function() {
+    var script = {
+      $exec: 'router1',
+      $method: 'post',
+      $args: { path: '/resource', body: { $data: '/object' } }
+    };
+
+    var data = {
+      object: { test: 'test' }
+    };
+
+    return js.evaluate(script, data).then(function (res) {
+      assert.equal(res, 'you posted {"test":"test"} to /resource');
+    });
+  });
+
+  it('should be able to use another scripts as the value of any keyword', function() {
+    var script = {
+      $exec: { $data: '/router' },
+      $method: { $data: '/method' },
+      $args: { $data: '/args' }
+    };
+
+    var data = {
+      router: 'router1',
+      method: 'post',
+      args: { path: '/resource', body: { test: 'test' } }
+    };
+
+    return js.evaluate(script, data).then(function (res) {
+      assert.equal(res, 'you posted {"test":"test"} to /resource');
+    });
   });
 });

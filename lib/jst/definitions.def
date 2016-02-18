@@ -34,3 +34,50 @@
     if (parentData !== undefined) parentData[parentDataProperty] = {{=$newData}};
   {{?}}
 #}}
+
+
+{{## def.validateSubSchema:
+  var js_errs{{=$lvl}} = errors;
+  {{# def.setCompositeRule }}
+  {{= it.validate($it) }}
+  {{# def.resetCompositeRule }}
+  {{=$valid}} = js_errs{{=$lvl}} == errors;
+#}}
+
+
+{{## def.validateSubSchemaAsync:
+  {{# def.validateSubSchema }}
+  if ({{=$valid}}) return {{=$data}};
+  throw new ValidationError(vErrors);
+#}}
+
+
+{{## def.setCompositeRule:
+  {{
+    var $wasComposite = it.compositeRule;
+    it.compositeRule = $it.compositeRule = true;
+  }}
+#}}
+
+
+{{## def.resetCompositeRule:
+  {{ it.compositeRule = $it.compositeRule = $wasComposite; }}
+#}}
+
+
+{{## def.beginDefOut:
+  {{
+    var $$outStack = $$outStack || [];
+    $$outStack.push(out);
+    out = '';
+  }}
+#}}
+
+
+{{## def.storeDefOut:_variable:
+  {{
+    var _variable = out;
+    out = $$outStack.pop();
+  }}
+#}}
+
