@@ -1,0 +1,22 @@
+[
+  {
+    "description": "$if errors",
+    "data": {
+      "notBoolean": 1
+    },
+    "tests": [
+      {
+        "description": "$if keyword is constant and it is not boolean",
+        "script": { "$if": 1, "$then": "foo" },
+        "error": "validation failed",
+        "validationErrors": [ "should be boolean" ]
+      },
+      {
+        "description": "$if is a script that evaluates to non-boolean value",
+        "script": { "$if": { "$data": "/notBoolean" }, "$then": "foo" },
+        "error": "validation failed",
+        "validationErrors": [ "should be boolean" ]
+      }
+    ]
+  }
+]
