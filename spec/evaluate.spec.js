@@ -5,7 +5,7 @@ var assert = require('assert');
 var testutil = require('./testutil');
 var getPromise = testutil.getPromise;
 var shouldBeError = testutil.shouldBeError;
-var routers = require('./routers');
+var executors = require('./executors');
 
 
 describe('script evaluation', function() {
@@ -13,7 +13,7 @@ describe('script evaluation', function() {
 
   before(function() {
     js = JSONScript();
-    js.addExecutor('router1', routers.router1);
+    js.addExecutor('router1', executors.router1);
   });
 
   beforeEach(function(){
@@ -25,6 +25,7 @@ describe('script evaluation', function() {
     var script = {
       a: {
         $exec: 'router1',
+        $method: 'get',
         $args: { path: '/resource' }
       },
       b: {
@@ -37,14 +38,14 @@ describe('script evaluation', function() {
     return js.evaluate(script).then(function (res) {
       assert.deepEqual(res, {
         a: 'you requested /resource from router1',
-        b: 'you posted {"test":"test"} to /resource at router1'
+        b: 'you posted {"test":"test"} to router1 /resource'
       });
 
       assert.deepEqual(callsResolutions, [
         { call: 'get: /resource' },
         { call: 'post: /resource' },
         { res: 'you requested /resource from router1' },
-        { res: 'you posted {"test":"test"} to /resource at router1' }
+        { res: 'you posted {"test":"test"} to router1 /resource' }
       ]);
     });
   });
@@ -53,6 +54,7 @@ describe('script evaluation', function() {
     var script = [
       {
         $exec: 'router1',
+        $method: 'get',
         $args: { path: '/resource' }
       },
       {
@@ -65,14 +67,14 @@ describe('script evaluation', function() {
     return js.evaluate(script).then(function (res) {
       assert.deepEqual(res, [
         'you requested /resource from router1',
-        'you posted {"test":"test"} to /resource at router1'
+        'you posted {"test":"test"} to router1 /resource'
       ]);
 
       assert.deepEqual(callsResolutions, [
         { call: 'get: /resource' },
         { res: 'you requested /resource from router1' },
         { call: 'post: /resource' },
-        { res: 'you posted {"test":"test"} to /resource at router1' }
+        { res: 'you posted {"test":"test"} to router1 /resource' }
       ]);
     });
   });  

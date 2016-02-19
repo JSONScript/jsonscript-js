@@ -1,0 +1,32 @@
+[
+  {
+    "description": "$exec errors",
+    "tests": [
+      {
+        "description": "unknown executor",
+        "script": {
+          "$exec": "routerX",
+          "$args": { "path": "/resource" }
+        },
+        "error": "unknown executor routerX"
+      },
+      {
+        "description": "unknown method",
+        "script": {
+          "$exec": "router1",
+          "$method": "methodX",
+          "$args": { "path": "/resource", "body": { "test": "test" } }
+        },
+        "error": "unknown method methodX of executor router1"
+      },
+      {
+        "description": "executor-object used as a function",
+        "script": {
+          "$exec": "router1",
+          "$args": { "path": "/resource" }
+        },
+        "error": "executor router1 is not a function"
+      }
+    ]
+  }
+]

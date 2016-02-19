@@ -4,7 +4,7 @@ var JSONScript = require('../lib/jsonscript');
 var assert = require('assert');
 var testutil = require('./testutil');
 var shouldBeError = testutil.shouldBeError;
-var routers = require('./routers');
+var executors = require('./executors');
 
 
 describe('$if instruction - conditional evaluation', function() {
@@ -12,8 +12,8 @@ describe('$if instruction - conditional evaluation', function() {
 
   before(function() {
     js = JSONScript();
-    js.addExecutor('router1', routers.router1);
-    js.addExecutor('router2', routers.router2);
+    js.addExecutor('router1', executors.router1);
+    js.addExecutor('router2', executors.router2);
     js.addExecutor('async', function (value) { return Promise.resolve(value); });
   });
 
@@ -117,8 +117,8 @@ describe('$if instruction - conditional evaluation', function() {
     return Promise.all([
       test({
         $if: { $data: '/cond1' },
-        $then: { $exec: 'router1', $args: { path: '/resource' } },
-        $else: { $exec: 'router2', $args: { path: '/resource' } }
+        $then: { $exec: 'router1', $method: 'get', $args: { path: '/resource' } },
+        $else: { $exec: 'router2', $method: 'get', $args: { path: '/resource' } }
       }, 'you requested /resource from router1'),
       test({
         $exec: {
@@ -126,6 +126,7 @@ describe('$if instruction - conditional evaluation', function() {
           $then: { $data: '/thenRouter' },
           $else: { $data: '/elseRouter' }
         },
+        $method: 'get',
         $args: { path: '/resource' }
       }, 'you requested /resource from router1')
     ]);

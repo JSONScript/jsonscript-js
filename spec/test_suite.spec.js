@@ -2,14 +2,17 @@
 
 var jsonScriptTest = require('jsonscript-test');
 var JSONScript = require('../lib/jsonscript');
+var executors = require('./executors');
 var Ajv = require('ajv');
 var assert = require('assert');
 
 var js = JSONScript();
+js.addExecutor('func1', executors.func1);
+js.addExecutor('router1', executors.router1);
+js.addExecutor('router2', executors.router2);
 
 
 jsonScriptTest(js, {
-  only: true,
   description: 'JSONScript evaluation tests',
   suites: {
     'JSONScript test suite': '../node_modules/jsonscript-test-suite/tests/{**/,}*.json',
