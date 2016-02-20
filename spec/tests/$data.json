@@ -1,5 +1,58 @@
 [
   {
+    "description": "$data with different JSON pointers as URL hash fragments",
+    "data": {
+      "": "abc",
+      "foo": 1,
+      "~bar": {
+        "/baz": 2,
+        "%quux": 3
+      }
+    },
+    "tests": [
+      {
+        "description": "# -> data",
+        "script": { "$data": "#" },
+        "result": {
+          "": "abc",
+          "foo": 1,
+          "~bar": {
+            "/baz": 2,
+            "%quux": 3
+          }
+        }
+      },
+      {
+        "description": "#/ -> data['']",
+        "script": { "$data": "#/" },
+        "result": "abc"
+      },
+      {
+        "description": "#/foo -> data.foo",
+        "script": { "$data": "#/foo" },
+        "result": 1
+      },
+      {
+        "description": "#/~0bar -> data['~bar']",
+        "script": { "$data": "#/~0bar" },
+        "result": {
+          "/baz": 2,
+          "%quux": 3
+        }
+      },
+      {
+        "description": "#/~0bar/~1baz -> data['~bar']['/baz']",
+        "script": { "$data": "#/~0bar/~1baz" },
+        "result": 2
+      },
+      {
+        "description": "#/~0bar/%25quux -> data['~bar']['%quux']",
+        "script": { "$data": "#/~0bar/%25quux" },
+        "result": 3
+      }
+    ]
+  },
+  {
     "description": "$data errors",
     "data": {
       "foo": 1,
