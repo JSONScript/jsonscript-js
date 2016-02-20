@@ -1,0 +1,13 @@
+[
+  {
+    "description": "$delay errors",
+    "tests": [
+      {
+        "description": "$wait should be integer",
+        "script": { "$delay": 1, "$wait": 20.5 },
+        "error": "validation failed",
+        "validationErrors": [ "should be integer" ]
+      }
+    ]
+  }
+]

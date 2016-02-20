@@ -16,6 +16,21 @@
         "script": { "$if": { "$data": "/notBoolean" }, "$then": "foo" },
         "error": "validation failed",
         "validationErrors": [ "should be boolean" ]
+      },
+      {
+        "description": "asynchronous $if evaluates to non-boolean",
+        "script": { "$if": { "$delay": 1 }, "$then": "foo" },
+        "error": "validation failed",
+        "validationErrors": [ "should be boolean" ]
+      },
+      {
+        "description": "asynchronous $if evaluates to non-boolean",
+        "script": {
+          "$if": { "$data": { "$delay": "/notBoolean" } },
+          "$then": "foo"
+        },
+        "error": "validation failed",
+        "validationErrors": [ "should be boolean" ]
       }
     ]
   }

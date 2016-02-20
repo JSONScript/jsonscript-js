@@ -13,6 +13,7 @@ js.addExecutor('router2', executors.router2);
 
 
 jsonScriptTest(js, {
+  // only: ['$delay'],
   description: 'JSONScript evaluation tests',
   suites: {
     'JSONScript test suite': '../node_modules/jsonscript-test-suite/tests/{**/,}*.json',
