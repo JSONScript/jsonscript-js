@@ -3,6 +3,7 @@
 var util = require('../lib/util');
 var assert = require('assert');
 var getPromise = require('./testutil').getPromise;
+var pointer = require('json-pointer');
 
 
 describe('util', function() {
@@ -270,6 +271,49 @@ describe('util', function() {
           ]);
         });
       });
+    });
+  });
+
+
+  describe('toAbsolutePointer', function() {
+    var base = pointer.parse('/foo/bar');
+
+    it('should return property/index for N# pointer', function() {
+      var absPntr = util.toAbsolutePointer('0#', base);
+      assert.equal(absPntr, 'bar');
+
+      var absPntr = util.toAbsolutePointer('1#', base);
+      assert.equal(absPntr, 'foo');
+    });
+
+    it('should throw if N# points outside of the object', function() {
+      assert.throws(function() {
+        util.toAbsolutePointer('2#', base);
+      }, /Cannot access property\/index 2 levels up, current level is 2/);
+
+      assert.throws(function() {
+        util.toAbsolutePointer('3#', base);
+      }, /Cannot access property\/index 3 levels up, current level is 2/);
+    });
+
+    it('should return absolute parsed pointer', function() {
+      var absPntr = util.toAbsolutePointer('1/baz', base);
+      assert.deepEqual(absPntr, ['foo','baz']);
+
+      var absPntr = util.toAbsolutePointer('1/baz/~0abc/~1def', base);
+      assert.deepEqual(absPntr, ['foo','baz', '~abc', '/def']);
+
+      var absPntr = util.toAbsolutePointer('2/baz/quux', base);
+      assert.deepEqual(absPntr, ['baz', 'quux']);
+
+      var absPntr = util.toAbsolutePointer('0/baz', base);
+      assert.deepEqual(absPntr, ['foo', 'bar', 'baz']);
+    });
+
+    it('should trhow if N/... points outside of object', function() {
+      assert.throws(function() {
+        util.toAbsolutePointer('3/baz', base);
+      }, /Cannot reference script 3 levels up, current level is 2/);
     });
   });
 });

@@ -36,12 +36,38 @@
 #}}
 
 
+{{## assignDataFromParentData:
+  {{? $dataLvl }}
+    {{
+      var $parentData = 'data' + (($dataLvl-1)||'')
+        , $dataProperty = it.dataPathArr[$dataLvl];
+    }}
+
+    {{=$data}} = {{=$parentData}}[{{=$dataProperty}}];
+  {{??}}
+    data = parentData[parentDataProperty];
+  {{?}}
+#}}
+
+
 {{## def.validateSubSchema:
   var js_errs{{=$lvl}} = errors;
   {{# def.setCompositeRule }}
   {{= it.validate($it) }}
   {{# def.resetCompositeRule }}
   {{=$valid}} = js_errs{{=$lvl}} == errors;
+#}}
+
+
+{{## def.recursiveValidate:
+  var {{=$valid}} = validate.call(this, {{=$script}}, {{# def.dataPath }}{{# def.passParentData }});
+  if (!{{=$valid}}) {
+    if (vErrors === null) vErrors = validate.errors;
+    else vErrors = vErrors.concat(validate.errors);
+    errors = vErrors.length;
+  }
+
+  {{# def.assignDataFromParentData }}
 #}}
 
 
@@ -74,3 +100,16 @@
   }}
 #}}
 
+
+{{## def.dataPath:(dataPath || ''){{? it.errorPath != '""'}} + {{= it.errorPath }}{{?}}#}}
+
+
+{{## def.passParentData:
+  {{? $dataLvl }}
+    , data{{= ($dataLvl-1)||'' }}
+    , {{= it.dataPathArr[$dataLvl] }}
+  {{??}}
+    , parentData
+    , parentDataProperty
+  {{?}}
+#}}

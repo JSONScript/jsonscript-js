@@ -1,0 +1,42 @@
+[
+  {
+    "description": "$ref errors",
+    "tests": [
+      {
+        "description": "relative reference above the root",
+        "script": { "foo": 1, "bar": { "$ref": "2/foo" } },
+        "error": "Cannot reference script 2 levels up, current level is 1"
+      },
+      {
+        "description": "relative reference to itself",
+        "script": { "bar": { "$ref": "0/" } },
+        "error": "Cannot reference the same $ref instruction or child"
+      },
+      {
+        "description": "relative reference to itself via parent",
+        "script": { "bar": { "$ref": "1/bar" } },
+        "error": "Cannot reference the same $ref instruction or child"
+      },
+      {
+        "description": "absolute reference to itself",
+        "script": { "bar": { "$ref": "/bar" } },
+        "error": "Cannot reference the same $ref instruction or child"
+      },
+      {
+        "description": "relative reference to child",
+        "script": { "bar": { "$ref": "0/foo" } },
+        "error": "Cannot reference the same $ref instruction or child"
+      },
+      {
+        "description": "relative reference to child via parent",
+        "script": { "bar": { "$ref": "1/bar/foo" } },
+        "error": "Cannot reference the same $ref instruction or child"
+      },
+      {
+        "description": "absolute reference to child",
+        "script": { "bar": { "$ref": "/bar/foo" } },
+        "error": "Cannot reference the same $ref instruction or child"
+      }
+    ]
+  }
+]

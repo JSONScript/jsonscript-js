@@ -7,25 +7,21 @@
   var $script = 'js_script' + $lvl;
 }}
 
-var {{=$newData}} = this.js._evalKeywords.{{=$keyword}}.call(this, {{=$data}});
+var {{=$newData}} = this.js._evalKeywords.{{=$keyword}}.call(this, {{=$data}}, {{# def.dataPath }});
 
 var {{=$valid}};
 if ({{=$newData}} instanceof this.js.Script) {
   var {{=$script}} = {{=$newData}}.script;
   if ({{=$script}} && typeof {{=$script}}.then == 'function') {
     var {{=$newData}} = {{=$script}}.then((function ({{=$script}}) {
-      var {{=$data}} = { script: {{=$script}} };
-      {{# def.validateSubSchema }}
-      if ({{=$valid}}) return {{=$data}}.script;
+      {{# def.recursiveValidate }}
+      if ({{=$valid}}) return {{=$data}};
       throw new ValidationError(vErrors);
     }).bind(this));
     {{# def.replaceWithNewData }}
+    {{=$valid}} = true;
   } else {
-    {{=$newData}} = { script: {{=$script}} };
-    {{# def.replaceWithNewData }}
-    {{# def.validateSubSchema }}
-    {{=$newData}} = {{=$data}}.script;
-    {{# def.replaceWithNewData }}
+    {{# def.recursiveValidate }}
   }
 } else {
   {{# def.replaceWithNewData }}

@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/JSONScript/jsonscript-js",
   "dependencies": {
-    "ajv": "^3.6.2",
+    "ajv": "^3.7.1",
     "dot": "^1.0.3",
     "json-pointer": "^0.3.1",
     "jsonscript": "^0.1.2"
