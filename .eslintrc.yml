@@ -9,6 +9,7 @@ rules:
   valid-jsdoc: [ 2, { requireReturn: false } ]
   no-invalid-this: 2
   no-unused-vars: [ 2, { args: none } ]
+#  no-console: [ 2, { allow: [ warn, error ] } ]
   no-console: 0
   block-scoped-var: 2
   complexity: [ 2, 8 ]
