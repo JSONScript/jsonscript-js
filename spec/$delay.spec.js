@@ -25,7 +25,7 @@ describe('$delay instruction - delayed evaluation', function() {
 
     var script = {
       $delay: { $exec: 'router1', $method: 'get', $args: { path: '/resource' } },
-      $wait: 20
+      $wait: 50
     };
 
     js.evaluate(script).then(function (_res) {
@@ -36,12 +36,12 @@ describe('$delay instruction - delayed evaluation', function() {
     .then(function() {
       assertNoCalls();
       assert.strictEqual(result, undefined);
-      return delay(15);
+      return delay(25);
     })
     .then(function() {
       assertNoCalls();
       assert.strictEqual(result, undefined);
-      return delay(15);
+      return delay(30);
     })
     .then(function() {
       assertCallsResoltion(1);
