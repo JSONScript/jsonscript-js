@@ -41,7 +41,7 @@ describe('$delay instruction - delayed evaluation', function() {
     .then(function() {
       assertNoCalls();
       assert.strictEqual(result, undefined);
-      return delay(30);
+      return delay(25);
     })
     .then(function() {
       assertCallsResoltion(1);
