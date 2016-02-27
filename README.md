@@ -99,4 +99,18 @@ js.evaluate(script).then(function (res) {
 });
 ```
 
-In example above the second request is sent in parallel, without waiting for the response from the first request.
+In the example above the second request is sent in parallel, without waiting for the response from the first request.
+
+
+## Language
+
+The interpreter supports the following JSONScript instructions:
+
+- $exec - call to external executor
+- $data - reference to the data instance
+- $ref - reference to the part of the current script evaluation result
+- $if - conditional evaluation
+- $delay - delayed evaluation
+
+
+See [JSONScript language documentation](https://github.com/JSONScript/jsonscript/blob/master/LANGUAGE.md) for more information.
