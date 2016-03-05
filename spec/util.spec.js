@@ -10,11 +10,12 @@ describe('util', function() {
   describe('objectToPromise', function() {
     var objectToPromise = util.objectToPromise;
 
-    it('should return the same object if there are no promises', function() {
+    it('should return promise if there are no promises', function() {
       var obj = { a: 1, b: 2 };
       var result = objectToPromise(obj);
-      assert.deepEqual(result, obj);
-      assert.equal(result, obj);
+      return result.then(function (res) {
+        assert.deepEqual(res, obj);
+      });
     });
 
     it('should return promise resolving to object without promises (if object has one promise)', function() {
@@ -59,9 +60,11 @@ describe('util', function() {
 
       it('should map array without promises synchronously', function() {
         var arr = [1, 2, 3];
-        var result = promiseMapSerial(arr, syncMapper);
-        assert.deepEqual(result, [10, 20, 30]);
-        assert.deepEqual(callsResolutions, [{ call: 1 }, { call: 2 }, { call: 3 }]);
+        return promiseMapSerial(arr, syncMapper)
+        .then(function (result) {
+          assert.deepEqual(result, [10, 20, 30]);
+          assert.deepEqual(callsResolutions, [{ call: 1 }, { call: 2 }, { call: 3 }]);
+        });
       });
 
       it('should return promise resolving to array without promises (if array has one promise)', function() {
