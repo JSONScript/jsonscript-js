@@ -13,7 +13,7 @@ var {{=$valid}};
 if ({{=$newData}} instanceof this.js.Script) {
   var {{=$script}} = {{=$newData}}.script;
   if ({{=$script}} && typeof {{=$script}}.then == 'function') {
-    var {{=$newData}} = {{=$script}}.then((function ({{=$script}}) {
+    {{=$newData}} = {{=$script}}.then((function ({{=$script}}) {
       {{# def.recursiveValidate }}
       if ({{=$valid}}) return {{=$data}};
       throw new ValidationError(vErrors);

@@ -42,8 +42,8 @@ js.evaluate(script).then(function (res) {
   console.log(res);
   /**
    *  [
-   *    { responce: 'loaded /resource/1' },
-   *    { responce: 'updated /resource/1 with {"test":"test"}' }
+   *    { response: 'loaded /resource/1' },
+   *    { response: 'updated /resource/1 with {"test":"test"}' }
    *  ]
    */
 });
@@ -92,8 +92,8 @@ js.evaluate(script).then(function (res) {
   console.log(res);
   /**
    *  {
-   *    res1: { responce: 'loaded /resource/1' },
-   *    res2: { responce: 'loaded /resource/2' }
+   *    res1: { response: 'loaded /resource/1' },
+   *    res2: { response: 'loaded /resource/2' }
    *  }
    */
 });
