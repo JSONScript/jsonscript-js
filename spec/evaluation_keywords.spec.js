@@ -83,13 +83,14 @@ describe('evaluation keywords', function() {
       validate = js.ajv.compile(schema);
     });
 
-    it('should leave object as is if there are no promises', function() {
+    it('should return promise resolving to object if there are no promises', function() {
       var obj = { a: 1, b: 2, c: 3 };
       var data = { obj: obj };
       assert(validate.call({ js: js }, data));
       assert.strictEqual(validate.errors, null);
-      assert.equal(data.obj, obj);
-      assert.deepEqual(data.obj, obj);
+      return data.obj.then(function (o) {
+        assert.deepEqual(o, obj);
+      });
     });
 
     it('should merge promises in properties in a single promise', function() {
