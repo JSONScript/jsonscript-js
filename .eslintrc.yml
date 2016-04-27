@@ -4,7 +4,7 @@ extends: 'eslint:recommended'
 globals:
   Promise: false
 parserOptions:
-  ecmaVersion: 6
+  ecmaVersion: 5
 rules:
   indent: [ 2, 2, { SwitchCase: 1 } ]
   no-trailing-spaces: 2
