@@ -2,8 +2,6 @@
 
 JavaScript interpreter for [JSONScript](https://github.com/JSONScript/jsonscript)
 
-It is work in progress.
-
 [![Build Status](https://travis-ci.org/JSONScript/jsonscript-js.svg?branch=master)](https://travis-ci.org/JSONScript/jsonscript-js)
 [![npm version](https://badge.fury.io/js/jsonscript-js.svg)](https://www.npmjs.com/package/jsonscript-js)
 [![Code Climate](https://codeclimate.com/github/JSONScript/jsonscript-js/badges/gpa.svg)](https://codeclimate.com/github/JSONScript/jsonscript-js)
