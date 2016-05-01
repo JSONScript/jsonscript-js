@@ -36,8 +36,8 @@
     "coveralls": "^2.11.6",
     "eslint": "^2.2.0",
     "istanbul": "^0.4.2",
-    "jsonscript-test": "^0.2.0",
-    "jsonscript-test-suite": "^0.2.1",
+    "jsonscript-test": "^0.2.1",
+    "jsonscript-test-suite": "^0.2.2",
     "mocha": "^2.4.5",
     "pre-commit": "^1.1.2"
   }
