@@ -130,5 +130,92 @@ describe('macros', function() {
         ]
       });
     });
+
+
+    it('should expand macro inside macro', function() {
+      var script = {
+        "$$calc.equal": [
+          { "$$router1.get": { "path": { "$data": "/path" } } },
+          "you requested /resource/1 from router1"
+        ]
+      };
+
+      js.expandMacros(script);
+
+      assert.deepEqual(script, {
+        "$exec": "calc",
+        "$method": "equal",
+        "$args": [
+          {
+            "$exec": "router1",
+            "$method": "get",
+            "$args": {
+              "path": { "$data": "/path" }
+            }
+          },
+          "you requested /resource/1 from router1"
+        ]
+      });
+    });
+  });
+
+
+  describe('expand function call', function() {
+    it('should expand to $call instruction', function() {
+      var script = {
+        "res1": { "$#myfunc": [ 1 ] },
+        "res2": { "$#myfunc": [ 2 ] }
+      };
+
+      js.expandMacros(script);
+
+      assert.deepEqual(script, {
+        "res1": {
+          "$call": "myfunc",
+          "$args": [ 1 ]
+        },
+        "res2": {
+          "$call": "myfunc",
+          "$args": [ 2 ]
+        }
+      });
+    });
+  });
+
+
+  describe('expand calculations', function() {
+    it('should expand to $calc instruction', function() {
+      var script = [
+        { "$+": [ 1, 2 ] },
+        { "$-": [ 2, 1 ] },
+        { "$*": [ 1, 2 ] },
+        { "$/": [ 2, 1 ] }
+      ];
+
+      js.expandMacros(script);
+
+      assert.deepEqual(script, [
+        {
+          "$exec": "calc",
+          "$method": "add",
+          "$args": [ 1, 2 ]
+        },
+        {
+          "$exec": "calc",
+          "$method": "subtract",
+          "$args": [ 2, 1 ]
+        },
+        {
+          "$exec": "calc",
+          "$method": "multiply",
+          "$args": [ 1, 2 ]
+        },
+        {
+          "$exec": "calc",
+          "$method": "divide",
+          "$args": [ 2, 1 ]
+        }
+      ]);
+    });
   });
 });
