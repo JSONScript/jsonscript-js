@@ -25,16 +25,22 @@ var js = JSONScript();
 js.addExecutor('router', getRouter());
 
 var script = [
-  {
-    $exec: 'router',
-    $args: { path: '/resource/1' }
-  },
-  {
-    $exec: 'router',
-    $method: 'put',
-    $args: { path: '/resource/1', body: { test: 'test' } }
-  }
+  { '$$router': { path: '/resource/1' } },
+  { '$$router.put': { path: '/resource/1', body: { test: 'test' } } }
 ];
+
+// equivalent script using full syntax:
+// var script = [
+//   {
+//     $exec: 'router',
+//     $args: { path: '/resource/1' }
+//   },
+//   {
+//     $exec: 'router',
+//     $method: 'put',
+//     $args: { path: '/resource/1', body: { test: 'test' } }
+//   }
+// ];
 
 js.evaluate(script).then(function (res) {
   console.log(res);
@@ -74,17 +80,23 @@ Parallel execution:
 
 ```javascript
 var script = {
-  res1: {
-    $exec: 'router',
-    $method: 'get',
-    $args: { path: '/resource/1' }
-  },
-  res2: {
-    $exec: 'router',
-    $method: 'get',
-    $args: { path: '/resource/2' }
-  }
+  res1: { '$$router.get': { path: '/resource/1' } },
+  res2: { '$$router.get': { path: '/resource/2' } }
 };
+
+// equivalent script using full syntax:
+// var script = {
+//   res1: {
+//     $exec: 'router',
+//     $method: 'get',
+//     $args: { path: '/resource/1' }
+//   },
+//   res2: {
+//     $exec: 'router',
+//     $method: 'get',
+//     $args: { path: '/resource/2' }
+//   }
+// };
 
 js.evaluate(script).then(function (res) {
   console.log(res);
@@ -101,14 +113,5 @@ In the example above the second request is sent in parallel, without waiting for
 
 
 ## Language
-
-The interpreter supports the following JSONScript instructions:
-
-- $exec - call to external executor
-- $data - reference to the data instance
-- $ref - reference to the part of the current script evaluation result
-- $if - conditional evaluation
-- $delay - delayed evaluation
-
 
 See [JSONScript language documentation](https://github.com/JSONScript/jsonscript/blob/master/LANGUAGE.md) for more information.
