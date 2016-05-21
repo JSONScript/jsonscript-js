@@ -8,7 +8,7 @@
     "test-spec": "mocha spec/*.spec.js -R spec",
     "test-cov": "istanbul cover -x 'spec/**' node_modules/mocha/bin/_mocha -- spec/*.spec.js -R spec",
     "test-debug": "mocha spec/*.spec.js --debug-brk -R spec",
-    "eslint": "eslint lib/*.js"
+    "eslint": "eslint lib/*.js lib/**/*.js"
   },
   "repository": {
     "type": "git",
