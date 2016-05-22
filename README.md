@@ -29,19 +29,6 @@ var script = [
   { '$$router.put': { path: '/resource/1', body: { test: 'test' } } }
 ];
 
-// equivalent script using full syntax:
-// var script = [
-//   {
-//     $exec: 'router',
-//     $args: { path: '/resource/1' }
-//   },
-//   {
-//     $exec: 'router',
-//     $method: 'put',
-//     $args: { path: '/resource/1', body: { test: 'test' } }
-//   }
-// ];
-
 js.evaluate(script).then(function (res) {
   console.log(res);
   /**
@@ -83,20 +70,6 @@ var script = {
   res1: { '$$router.get': { path: '/resource/1' } },
   res2: { '$$router.get': { path: '/resource/2' } }
 };
-
-// equivalent script using full syntax:
-// var script = {
-//   res1: {
-//     $exec: 'router',
-//     $method: 'get',
-//     $args: { path: '/resource/1' }
-//   },
-//   res2: {
-//     $exec: 'router',
-//     $method: 'get',
-//     $args: { path: '/resource/2' }
-//   }
-// };
 
 js.evaluate(script).then(function (res) {
   console.log(res);
