@@ -1,6 +1,6 @@
 {
   "name": "jsonscript-js",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "JavaScript interpreter for JSONScript",
   "main": "lib/jsonscript.js",
   "scripts": {
@@ -37,7 +37,7 @@
     "eslint": "^2.2.0",
     "istanbul": "^0.4.2",
     "jsonscript-test": "^0.4.0",
-    "jsonscript-test-suite": "^0.4.0",
+    "jsonscript-test-suite": "^0.4.1",
     "mocha": "^2.4.5",
     "pre-commit": "^1.1.2"
   }

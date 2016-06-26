@@ -5,6 +5,7 @@
 {{
   var $dataNxt = $it.dataLevel = it.dataLevel + 1
     , $nextData = 'data' + $dataNxt;
+  $it.errorPath = it.util.getPathExpr(it.errorPath, 'i' + $lvl, it.opts.jsonPointers, true);
   $it.dataPathArr[$dataNxt] = 'i' + $lvl;
 }}
 
