@@ -20,7 +20,7 @@ describe('$delay instruction - delayed evaluation', function() {
     callsResolutions = getPromise.callsResolutions = [];
   });
 
-  it.skip('should delay $wait milliseconds', function (){
+  it('should delay $wait milliseconds', function (){
     var result;
 
     var script = {
