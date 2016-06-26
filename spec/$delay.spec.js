@@ -46,7 +46,7 @@ describe('$delay instruction - delayed evaluation', function() {
     .then(function() {
       assertCallsResoltion(1);
       assert.strictEqual(result, undefined);
-      return delay(20); // assumes $exec delay of 20ms
+      return delay(200);
     })
     .then(function() {
       assertCallsResoltion(2);
