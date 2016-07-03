@@ -8,7 +8,7 @@ describe('jsonscript', function() {
   var js;
 
   before(function() {
-    js = JSONScript();
+    js = new JSONScript;
   });
 
   describe('method validate', function() {

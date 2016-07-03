@@ -12,7 +12,7 @@ describe('$delay instruction - delayed evaluation', function() {
   var js, callsResolutions;
 
   before(function() {
-    js = JSONScript();
+    js = new JSONScript;
     js.addExecutor('router1', executors.router1);
   });
 

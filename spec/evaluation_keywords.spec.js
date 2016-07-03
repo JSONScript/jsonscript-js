@@ -9,7 +9,7 @@ describe('evaluation keywords', function() {
   var js;
 
   before(function() {
-    js = JSONScript();
+    js = new JSONScript;
   });
 
   describe('keyword validateAsync', function() {

@@ -6,7 +6,7 @@ var executors = require('./executors');
 var Ajv = require('ajv');
 var assert = require('assert');
 
-var instances = [ JSONScript(), JSONScript({ strict: true }) ];
+var instances = [ new JSONScript, new JSONScript({ strict: true }) ];
 
 instances.forEach(function (js) {
   js.addExecutor('func1', executors.func1);

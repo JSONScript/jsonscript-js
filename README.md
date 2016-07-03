@@ -20,7 +20,7 @@ Sequential execution of script commands:
 
 ```javascript
 var JSONScript = require('jsonscript-js');
-var js = JSONScript();
+var js = new JSONScript;
 
 js.addExecutor('router', getRouter());
 

@@ -10,7 +10,7 @@ describe('macros', function() {
   var js;
 
   before(function() {
-    js = JSONScript();
+    js = new JSONScript;
   });
 
 
