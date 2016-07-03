@@ -22,4 +22,13 @@ describe('jsonscript', function() {
       assert.strictEqual(js.validate.errors, null);
     });
   });
+
+
+  describe('method addExecutor', function() {
+    it('should throw if executor is already defined', function() {
+      assert.throws(function() {
+        js.addExecutor('calc', {});
+      });
+    });
+  });
 });

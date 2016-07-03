@@ -106,6 +106,8 @@ Evaluate script. Returns Promise that resolves to the script evaluation result o
 
 Add executor to the interpreter. Can be an object or a function with methods.
 
+This method throws exception if you use the name that is already used (including predefined executors `array`, `calc` and `str`).
+
 
 ##### .addInstruction(Object definition, Function func)
 
