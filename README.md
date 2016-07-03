@@ -85,6 +85,51 @@ js.evaluate(script).then(function (res) {
 In the example above the second request is sent in parallel, without waiting for the response from the first request.
 
 
+## API
+
+##### new JSONScript(Object options) -&gt; Object
+
+Create JSONScript interpreter instance.
+
+
+##### .validate(Any script) -&gt; Boolean
+
+Validate script. This method is called automatically before the script is evaluated.
+
+
+##### .evaluate(Any script, Any data) -&gt; Promise<Any>
+
+Evaluate script. Returns Promise that resolves to the script evaluation result or rejects in case of validation or executor error.
+
+
+##### .addExecutor(String name, Function|Object executor)
+
+Add executor to the interpreter. Can be an object or a function with methods.
+
+
+##### .addInstruction(Object definition, Function func)
+
+Define JSONScript instruction. Core instructions are added using this method too.
+
+`definition` should be valid according to the [instruction schema](http://www.json-script.com/schema/instruction.json#).
+
+`func` is the function used to evaluate instruction, it can return:
+
+- Promise that resolves to the evaluation result
+- instance of Script that can contain:
+  - a script that should be evaluated
+  - a Promise that resolves to a script (for delayed evaluation).
+
+Class `Script` is available as the property of both the class and the instance of JSONScript interpreter.
+
+
+##### .addMacro(Object definition)
+
+Define macro. Core macros are added using this method too.
+
+`definition` should be valid according to the [macro schema](http://www.json-script.com/schema/macro.json#).
+
+
 ## Language
 
 See [JSONScript language documentation](https://github.com/JSONScript/jsonscript/blob/master/LANGUAGE.md) for more information.
