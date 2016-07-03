@@ -132,6 +132,21 @@ Define macro. Core macros are added using this method too.
 `definition` should be valid according to the [macro schema](http://www.json-script.com/schema/macro.json#).
 
 
+## Options
+
+Defaults:
+
+```javascript
+{
+  strict: false,
+  executors: {}
+}
+```
+
+- _strict_: use strict JSONScript schema (see [schemas](http://www.json-script.com/schema.html)). Strict schema validates instruction keyword values if they are defined as constant so it would fail faster if the script is invalid and no instructions will be executed, but the validation itself takes longer.
+- _executors_: an object with executors (keys are names).
+
+
 ## Language
 
 See [JSONScript language documentation](https://github.com/JSONScript/jsonscript/blob/master/LANGUAGE.md) for more information.
