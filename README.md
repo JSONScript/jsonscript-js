@@ -113,7 +113,7 @@ This method throws exception if you use the name that is already used (including
 
 Define JSONScript instruction. Core instructions are added using this method too.
 
-`definition` should be valid according to the [instruction schema](http://www.json-script.com/schema/instruction.json#).
+`definition` should be valid according to the [instruction schema](http://www.jsonscript.org/schema/instruction.json#).
 
 `func` is the function used to evaluate instruction, it can return:
 
@@ -129,7 +129,7 @@ Class `Script` is available as the property of both the class and the instance o
 
 Define macro. Core macros are added using this method too.
 
-`definition` should be valid according to the [macro schema](http://www.json-script.com/schema/macro.json#).
+`definition` should be valid according to the [macro schema](http://www.jsonscript.org/schema/macro.json#).
 
 
 ## Options
@@ -143,7 +143,7 @@ Defaults:
 }
 ```
 
-- _strict_: use strict JSONScript schema (see [schemas](http://www.json-script.com/schema.html)). Strict schema validates instruction keyword values if they are defined as constant so it would fail faster if the script is invalid and no instructions will be executed, but the validation itself takes longer.
+- _strict_: use strict JSONScript schema (see [schemas](http://www.jsonscript.org/schema.html)). Strict schema validates instruction keyword values if they are defined as constant so it would fail faster if the script is invalid and no instructions will be executed, but the validation itself takes longer.
 - _executors_: an object with executors (keys are names).
 
 
